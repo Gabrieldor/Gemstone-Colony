@@ -50,4 +50,12 @@ Whenever a task involves UI (Canvas panels, buttons, HUD, inventory, dialogs, et
 - Suggested structure:
   - `Docs/GDD.md` — game concept, systems, mechanics, design decisions and rationale.
   - `Docs/Checklist.md` — task/feature checklist, grouped by system/milestone.
+  - `Docs/Systems/<SystemName>.md` — one doc per significant system/functionality (e.g. a procedural generation system, a gameplay mechanic). See below.
 - When a task changes design direction or adds/removes scope, update the GDD and checklist as part of that task, not as an afterthought.
+- **Per-system mechanics docs.** Whenever a significant system or functionality is built or meaningfully changed (procedural generation, gameplay mechanics, core systems — not one-off scripts), create or update a dedicated doc at `Docs/Systems/<SystemName>.md` as part of that same task. Purpose: let a future Claude session (or the user) understand how the mechanic actually works without re-reading the source or re-deriving design decisions from scratch. Write it in plain language, not a code walkthrough:
+  - What the system does and why it exists (one paragraph).
+  - The core mechanic/algorithm in plain terms — the "how it works" a teammate would want explained on a whiteboard, not a line-by-line narration of the code.
+  - Key files and what each owns (one line each), so the reader knows where to look next.
+  - Important gotchas/invariants that aren't obvious from the code (e.g. "every consumer must derive positions from the same shared config or seams reappear").
+  - Current known limitations/scope boundaries (what this does *not* do yet).
+  - This is distinct from the GDD: the GDD tracks *design decisions and rationale* over time; a system doc is a *standing reference* for how the thing works right now — keep it current, don't let it accumulate history the way GDD entries do.
